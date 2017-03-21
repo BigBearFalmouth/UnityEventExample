@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -6,47 +7,16 @@ using System.Reflection;
 
 public class EventManager : MonoBehaviour {
 
-
-    public delegate void OnCharacterArrivedAtWaypoint();
-    public event OnCharacterArrivedAtWaypoint characterArrivedDelegate;
-
-    public List<OnCharacterArrivedAtWaypoint> characterArrivedDelegates= new List<OnCharacterArrivedAtWaypoint>();
+    public UnityEvent characterEvents;
 
     // Use this for initialization
     void Start () {
+        if (characterEvents == null)
+            characterEvents = new UnityEvent();
     }
 	
-
-    public void AddCharacterArrivedDelegate(OnCharacterArrivedAtWaypoint arrivedDelegate)
-    {
-        characterArrivedDelegate += arrivedDelegate;
-        characterArrivedDelegates.Add(arrivedDelegate);
-    }
-
-    public void RemoveCharacterArrivedDelegate(OnCharacterArrivedAtWaypoint arrivedDelegate)
-    {
-        characterArrivedDelegate -= arrivedDelegate;
-        characterArrivedDelegates.Remove(arrivedDelegate);
-    }
-
     public void NotifyCharacterArrived()
     {
-        Debug.Log("Character Arrived");
-        characterArrivedDelegate();
-    }
-
-    void ClearArrivedDelegates()
-    {
-        for(int i=0;i<characterArrivedDelegates.Count;i++)
-        {
-            RemoveCharacterArrivedDelegate(characterArrivedDelegates[i]);
-        }
-
-        characterArrivedDelegates.Clear();
-    }
-
-    void OnDestroy()
-    {
-        ClearArrivedDelegates();
+        characterEvents.Invoke();
     }
 }
