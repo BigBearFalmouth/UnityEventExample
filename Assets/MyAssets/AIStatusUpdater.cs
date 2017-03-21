@@ -14,7 +14,7 @@ public class AIStatusUpdater : MonoBehaviour {
 	void Update () {
             float distance = agent.remainingDistance;
  
-            if (agent.pathPending && distance != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
+            if (!agent.pathPending && distance != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
             {
                 eventManager.NotifyCharacterArrived();
             }

@@ -31,6 +31,7 @@ public class EventManager : MonoBehaviour {
 
     public void NotifyCharacterArrived()
     {
+        Debug.Log("Character Arrived");
         characterArrivedDelegate();
     }
 
