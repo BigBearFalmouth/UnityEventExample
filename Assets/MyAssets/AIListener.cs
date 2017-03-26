@@ -4,6 +4,7 @@ using System.Collections;
 public class AIListener : MonoBehaviour {
 
     public Material successMaterial;
+    public Material notSuccessMaterial;
 
     Renderer renderer;
     // Use this for initialization
@@ -15,5 +16,10 @@ public class AIListener : MonoBehaviour {
     public void OnCharacterArrivedAtWaypoint()
     {
         renderer.material = successMaterial;
+    }
+
+    public void OnCharacterNotArrivedAtWaypoint()
+    {
+        renderer.material = notSuccessMaterial;
     }
 }
